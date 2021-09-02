@@ -1,5 +1,5 @@
 import csv
-import src as stl
+import src.stim_list as stl
 
 f = open("test.csv", "r")
 cc = csv.reader(f)

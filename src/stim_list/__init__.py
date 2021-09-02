@@ -66,10 +66,10 @@ class StimList(list):
         # Output sequence
         self.out_seq = []
 
-        # Main function to build the sorted output
-        self.__prand_seq()
+        # Merged output sequence
+        self.sorted_seq = []
 
-    def __prand_seq(self):
+    def prand_seq(self):
         """Pseudo Random List Sorting Algorithm. To be called after the constructor."""
         # First step is to create a sequence with pairs: trial_id, exp_cond
         simple_seq = self.__redux_seq()
@@ -91,7 +91,9 @@ class StimList(list):
 
             self.out_seq.append(self.__random_jump(simple_seq))
 
-        return self.__merge_seq()
+        self.__merge_seq()
+
+        return self.sorted_seq
 
     def __feasibility_test(self, seq_cond_count):
         """Test to check if the output list can be built."""
@@ -101,14 +103,11 @@ class StimList(list):
         return self.k * sum(counters[1:]) >= (counters[0] - self.k)
 
     def __merge_seq(self):
-        """Merge input_seq and out_seq by common trial_id column and order of out_seq"""
-        temp_seq = []
+        """Merge input_seq and out_seq by common trial_id column and the order of out_seq"""
         for i in self.out_seq:
             for j in self.input_seq:
                 if i[self.trial_id] == j[self.trial_id]:
-                    temp_seq.append(j)
-
-        return temp_seq
+                    self.sorted_seq.append(j)
 
     def __redux_seq(self):
         """Create a simplified sequence with pairs: trial_id, exp_cond."""

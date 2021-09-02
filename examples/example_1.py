@@ -10,6 +10,6 @@ for row in cc:
 
 my_list = stl.StimList(in_seq, 2, k=3)
 
-# my_list = my_list.prand_seq()
+my_list = my_list.prand_seq()
 
 print(my_list)
