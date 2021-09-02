@@ -10,7 +10,7 @@ for row in cc:
 
 my_list = stl.StimList(in_seq, 2, k=3)
 
-my_list = my_list.prand_seq()
+# my_list = my_list.prand_seq()
 
 # mynewlist = [y for x,y in sorted(zip(mylist,in_seq))]
 #
