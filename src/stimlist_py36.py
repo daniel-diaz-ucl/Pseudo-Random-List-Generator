@@ -86,7 +86,7 @@ class StimList(list):
         return self.k * sum(counters[1:]) >= (counters[0] - self.k)
 
     def __merge_seq(self):
-        """Merge input_seq and out_seq by common column and order of out_seq"""
+        """Merge input_seq and out_seq by common trial_id column and order of out_seq"""
         temp_seq = []
         for i in self.out_seq:
             for j in self.input_seq:

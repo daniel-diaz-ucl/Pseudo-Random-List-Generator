@@ -1,5 +1,5 @@
 import csv
-import stimlist as stl
+import src.stimlist_py36 as stl
 
 f = open("test.csv", "r")
 cc = csv.reader(f)
