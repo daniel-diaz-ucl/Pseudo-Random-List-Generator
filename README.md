@@ -1,4 +1,4 @@
-Pseudo Random List Sorting Algorithm
+# Pseudo Random List Sorting Algorithm
 
 This is a **Python 3.6** compatible _module_ for PsychoPy ([https://www.psychopy.org/](https://www.psychopy.org/)) and other **software packages that can interface with Python** (for example: [Presentations](https://www.neurobs.com/), [EyeLink](https://www.sr-research.com/experiment-builder/) or [PyGaze](http://www.pygaze.org/)).
 
