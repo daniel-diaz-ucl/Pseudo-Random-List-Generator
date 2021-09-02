@@ -1,0 +1,281 @@
+\documentclass[12pt]{article}
+\usepackage{authblk}
+\usepackage{ifxetex}
+\ifxetex
+\usepackage{fontspec}
+\setmainfont[Mapping=tex-text]{STIXGeneral}
+\else
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\fi
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+\usepackage{parskip}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\usepackage{mathptmx}
+\usepackage[margin=1.25in]{geometry}
+
+\title{Universal Pseudo Random List Sorting Algorithm}
+
+\author[1,2]{Daniel Diaz-Gonzalez}
+\affil[1]{UCL DCAL Research Centre - IT Officer}
+\affil[2]{University of London, Goldsmiths, University of London - Undergraduate BSc Computer Science}
+\date{November 1st, 2019}
+\setcounter{Maxaffil}{0}
+
+\renewcommand\Affilfont{\itshape\small}
+
+\allsectionsfont{\mdseries}
+
+\begin{document}
+
+  \maketitle
+
+\section*{Proof of \textit{feasibility} for any given input sequence \textbf{S}}
+
+Let define functions to build a finite sequence where the order of the elements is such as 
+no two consecutive elements have the same property \textit{c}\textsuperscript{\textdagger}. The input sequence is partitioned in smaller finite sequences by the \textit{commonality} of the property \textit{c} in all elements of any sub-sequence.
+
+Let \textit{h}: A $\rightarrow$ D where A, D are finite sequences and \textit{h} is a function 
+that reverses the order of the elements in A. Such as:
+
+\begin{center}
+\textit{h}(a\textsubscript{1}, a\textsubscript{2}, a\textsubscript{3}, \ldots, a\textsubscript{n}) 
+$\rightarrow$ (a\textsubscript{n}, a\textsubscript{n-1}, a\textsubscript{n-2}, \ldots, a\textsubscript{2}, a\textsubscript{1}) \textsuperscript{[1]}
+\end{center}
+
+Let \textit{g}: E \ensuremath{\times} F $\rightarrow$ H where E, F and H are finite sequences, 
+\textbar{}E\textbar{} $\geq$ \textbar{}F\textbar{} and \textit{g} is a function that 
+pairs an element of E, e\textsubscript{i}, \textit{i} = 1 to \textbar{}F\textbar{}, 
+with an element of F, f\textsubscript{i}, up to the element \textbar{}F\textbar{}\textit{-th}. 
+In addition, concatenate the remainder elements of E, e\textsubscript{i}, \textit{i} = \textbar{}F\textbar{} + 1 to \textbar{}E\textbar{} to that sequence. Such as:
+
+\begin{center}
+\textit{g}((e\textsubscript{1}, e\textsubscript{2}, \ldots, e\textsubscript{\textbar{}E\textbar{}}), 
+(f\textsubscript{1}, f\textsubscript{2}, \ldots, f\textsubscript{\textbar{}F\textbar{}})) 
+$\rightarrow$ ((e\textsubscript{1}, f\textsubscript{1}), (e\textsubscript{2}, f\textsubscript{2}), 
+\ldots, (e\textsubscript{\textbar{}F\textbar{}}, f\textsubscript{\textbar{}F\textbar{}}), 
+(e\textsubscript{\textbar{}F\textbar{} + 1}, \ldots, e\textsubscript{\textbar{}E\textbar{}})) 
+\textsuperscript{[2]}
+\end{center}
+
+Thus \textbar{}H\textbar{} = \textbar{}E\textbar{} + \textbar{}F\textbar{} 
+\textsuperscript{[3]}.
+
+It follows that the pairing function \textit{g} can build a sequence where no 
+two consecutive elements share the property \textit{c} \textit{if and only if} 
+\textbar{}E\textbar{} = \textbar{}F\textbar{} or \textbar{}E\textbar{} = \textbar{}F\textbar{} 
++ 1. \textsuperscript{[4]}
+
+Let \textit{f}: A \ensuremath{\times} B $\rightarrow$ C where A, B and C are finite sequences, 
+\textbar{}A\textbar{} $\geq$ \textbar{}B\textbar{} and \textit{f} is defined as:
+
+\begin{center}
+\textit{f}(A, B) = \textit{g}(\textit{h}(A), B) \textsuperscript{[5]}
+\end{center}
+
+Let an initial \textit{partition} of a finite sequence with \textit{n finite sub-sequences} such as S = (S\textsubscript{1}, S\textsubscript{2}, S\textsubscript{3}, \ldots, S\textsubscript{n}), where every element in the \textit{same sub-sequence} shared the property \textit{c}, every sub-sequence has a \textit{different} property \textit{c} from each other and the \textit{order 
+of the sub-sequences} are of \textit{decreasing cardinality}, 
+thus:
+
+\begin{center}
+\textbar{}S\textsubscript{1}\textbar{} 	$\geq$ \textbar{}S\textsubscript{2}\textbar{} $\geq$ \textbar{}S\textsubscript{3}\textbar{} $\geq$ \ldots $\geq$ \textbar{}S\textsubscript{n}\textbar{} \textsuperscript{[6]}
+\end{center}
+
+The function \textit{f} can build a sequence from this initial sequence, where \textit{f 
+}is applied recursively to the sub-sequences of S in increasing cardinality, from S\textsubscript{n} 
+to S\textsubscript{1}\textsuperscript{[6]}, following the pattern:
+
+\begin{center}
+\textit{f}(S\textsubscript{n-1}, S\textsubscript{n}) $\rightarrow$ T\textsubscript{j, j=1 
+to n-1};
+\end{center}
+\begin{center}
+if \textbar{}T\textsubscript{j}\textbar{} $\geq$ \textbar{}S\textsubscript{n-2}\textbar{} 
+then \textit{f}(T\textsubscript{j}, S\textsubscript{n-2}) else \textit{f}(S\textsubscript{n-2, 
+}T\textsubscript{j}) $\rightarrow$ T\textsubscript{j+1};
+\end{center}
+\begin{center}
+\ldots
+\end{center}
+\begin{center}
+if \textbar{}T\textsubscript{n-1}\textbar{} $\geq$ \textbar{}S\textsubscript{1}\textbar{} then \textit{f}(T\textsubscript{n-1}, S\textsubscript{1}) else \textit{f}(S\textsubscript{1}, T\textsubscript{n-1}) $\rightarrow$ T\textsubscript{n} \textsuperscript{[7]}
+\end{center}
+
+In addition, if the last application of \textit{f} in the algorithm\textsuperscript{ 
+[7]} follows the rule of \textit{g} \textsuperscript{[4]}, where \textbar{}S\textsubscript{1}\textbar{} 
+= \textbar{}T\textsubscript{n-1}\textbar{} + 1 or \textbar{}S\textsubscript{1}\textbar{} 
+is smaller than \textbar{}T\textsubscript{n-1}\textbar{} + 1, then all elements 
+of S\textsubscript{1} are paired by \textit{g} to elements of T\textsubscript{n-1}.
+
+Consequently, T\textsubscript{n-1} elements from S\textsubscript{2} that were not 
+paired with elements of T\textsubscript{n-2} in the previous iteration of the algorithm\textsuperscript{ 
+[7]} will be paired \textit{first} with elements of S\textsubscript{1} thanks to the input 
+order of \textit{g} \textsuperscript{[2]} and the application of the reverse order by function \textit{h} 
+\textsuperscript{[1]}. 
+
+In conclusion:
+
+It is possible to build a sequence where no two consecutive elements have the same 
+property \textit{c} \textit{if and only if:}
+
+The \textit{largest input sub-sequence} S\textsubscript{1} of the partition is equal or smaller, in 
+the number of elements, than the sum of all the number of elements from all the 
+other sub-sequences combined, plus one:
+
+\begin{center}
+\textbar{}S\textsubscript{1}\textbar{} $\leq$ \textbar{}T\textsubscript{n-1}\textbar{} 
++ 1 $\longrightarrow$\textsuperscript{[4]} \textbar{}S\textsubscript{1}\textbar{} 
+$\leq$ \textbar{}S\textsubscript{2}\textbar{} + \textbar{}S\textsubscript{3}\textbar{} 
++ \ldots + \textbar{}S\textsubscript{n}\textbar{} + 1 \textsuperscript{[8]}
+\end{center}
+
+\textsuperscript{\textdagger} The \textit{elements} of the sequence are \textit{tuples}. One \textit{member} of each tuple is defined as the property \textit{c}. The tuples with the \textit{same value} in member \textit{c} are elements of the same sub-sequence.
+
+\section*{Universal pseudo random list sorting algorithm}
+
+\begin{quote}
+Feasibility test:
+
+\begin{quote}
+(1) Order sequence \textbf{S} by \textit{grouping} elements by property \textit{c}, 
+\textit{counting} every group and \textit{sorting} them by cardinality \textsuperscript{[6]}.
+
+(2) Check feasibility of \textbf{S} by using the test \textsuperscript{[8]}.
+\end{quote}
+
+(Only for the first time) Check initial sequence with steps (1) and (2). If they are accepted, 
+build an output sequence in this order (until \textbf{S}* = $\varnothing$)\textsuperscript{\textdaggerdbl}:
+
+\begin{quote}
+(3) Pick a \textit{random} element of \textbf{S}, \textit{s*}.
+
+\begin{quote}
+(a) Check if output sequence \textbf{O} is empty (it is in the first iteration) 
+\textit{or} \textit{s*} has not the same property \textit{c} as the last element 
+of \textbf{O}.
+
+(b) Check a new shorter sequence \textbf{S}* = \textbf{S} - \{\textit{s}*\} with 
+steps (1) and (2).
+\end{quote}
+
+(4) If (a) \textit{and} (b) are accepted then concatenate \textit{s*} to sequence 
+\textbf{O} and go to step (3) with the new \textbf{S}*.
+
+(5) If (a) \textit{or} (b) are rejected go to step (3) with the original \textbf{S}.
+\end{quote}
+\end{quote}
+
+\textit{Correctness:} The output sequence \textbf{O} has no two consecutive elements 
+sharing the same property \textit{c}, as follows:
+
+\begin{quote}
+Let \textit{b}: O $\rightarrow$ \{true, false\}, a predicate function that checks \textbf{O} 
+= (o\textsubscript{1}, o\textsubscript{2}, o\textsubscript{3}\ldots o\textsubscript{\textbar{}S\textbar{}}), such as no element of \textbf{O} has the same property \textit{c} as the immediate neighbors. It starts at \textit{b}(o\textsubscript{1}). It follows from (4) that 
+all elements of \textbf{O} accepted (a) \textit{and} (b). Therefore, from (a) o\textsubscript{1} 
+has no neighbors and from (b) \textbf{S} - \{o\textsubscript{1}\} is a \textit{feasible} 
+sequence, i.e., it is possible to build a sequence where no two consecutive elements 
+have the same property \textit{c}. Therefore,\textit{ b}(o\textsubscript{1}) is 
+\textit{true}. Iteratively, the function \textit{b} tests the next elements \textit{b}(o\textsubscript{n, 
+n=2 to \textbar{}S\textbar{}}); from (a) it follows o\textsubscript{n} and o\textsubscript{n-1 
+}are not sharing the property \textit{c}, and from (b) it follows \textbf{S} - 
+\{o\textsubscript{1}, \ldots, o\textsubscript{n}\} is a \textit{feasible} sequence, 
+i.e., it is possible to build a sequence where no two consecutive elements have 
+the same property \textit{c}. Therefore,\textit{ b}(o\textsubscript{n}) is \textit{true} 
+for every element in the sequence \textbf{O}.
+\end{quote}
+
+\textsuperscript{\textdaggerdbl} The feasibility test guarantees the recursive loop will finish.
+
+\section*{Variation of the algorithm: \textbf{O} accepts \textit{k consecutive elements} 
+with property \textit{c}}
+
+Let the function \textit{g} \textsuperscript{[2]} to pair up to \textit{k} elements 
+of E with one element of F, where \textbar{}E\textbar{} $\geq$ \textbar{}F\textbar{}, 
+and concatenate the remaining unpaired elements of E to the end, such as:
+
+\begin{center}
+\textit{g}((e\textsubscript{1}, e\textsubscript{2}, \ldots, e\textsubscript{\textbar{}E\textbar{}}), 
+(f\textsubscript{1}, f\textsubscript{2}, \ldots, f\textsubscript{\textbar{}F\textbar{}})) 
+$\rightarrow$ 
+\end{center}
+\begin{center}
+$\rightarrow$ ((e\textsubscript{1}, e\textsubscript{2} \ldots e\textsubscript{k}, f\textsubscript{1}), 
+(e\textsubscript{k+1}, e\textsubscript{k+2} \ldots e\textsubscript{2k}, f\textsubscript{2}), 
+(e\textsubscript{2k+1}, e\textsubscript{2k+2} \ldots e\textsubscript{3k}, f\textsubscript{3}) \ldots
+\end{center}
+\begin{center}
+\ldots (e\textsubscript{(\textbar{}F\textbar{}-1)k+1} \ldots e\textsubscript{\textbar{}F\textbar{}k}, 
+f\textsubscript{\textbar{}F\textbar{}}), (e\textsubscript{\textbar{}F\textbar{}k 
++ 1} \ldots e\textsubscript{\textbar{}E\textbar{}})) \textsuperscript{[9]}
+\end{center}
+
+It follows that the pairing function \textit{g} \textsuperscript{[9]} can build 
+a sequence where \textit{up to k} consecutive elements share the property \textit{c} 
+\textit{if and only if}: 
+
+\begin{center}
+\textbar{}E\textbar{} $\leq$ \textit{k} \textperiodcentered{} \textbar{}F\textbar{} + \textit{k}. \textsuperscript{[10]}
+\end{center}
+
+Where the remaining \textit{unpaired elements} of E at the end can be \textit{at most k}.
+
+Using this modified function \textit{g} \textsuperscript{[9]} as part of \textit{f} 
+\textsuperscript{[5]}, the same function \textit{h} \textsuperscript{[1]} as defined 
+before, and the same recursive algorithm \textsuperscript{[7]} over all the sub-sequences of the input sequence \textbf{S} \textsuperscript{[6]}, if the last step with \textit{f}, S\textsubscript{1} 
+and T\textsubscript{n-1} follow the rule of \textit{g} \textsuperscript{[10]}, we 
+can conclude:
+
+It is possible to build a sequence where up to \textit{k consecutive elements} 
+shared the property \textit{c} \textit{if and only if} the \textit{largest input 
+sub-sequence} S\textsubscript{1} is equal or smaller, in the number of elements, than 
+\textit{k times} the sum of all the number of elements from all the other sub-sequences 
+combined, plus \textit{k} \textsuperscript{[10]}:
+
+\begin{center}
+\textbar{}S\textsubscript{1}\textbar{} $\leq$ \textit{k} \textperiodcentered{} (\textbar{}S\textsubscript{2}\textbar{} 
++ \textbar{}S\textsubscript{3}\textbar{} + \ldots + \textbar{}S\textsubscript{n}\textbar{}) 
++ \textit{k} \textsuperscript{[11]}
+\end{center}
+
+The changes in the new version of the sorting algorithm are:
+
+\begin{quote}
+In step (2), check feasibility of \textbf{S} by using the new test \textsuperscript{[11]}.
+
+In step (a), check if output sequence \textbf{O} is empty (it is in the first iteration) 
+or \textbar{}\textbf{O}\textbar{} \texttt{<} \textit{k} or \textit{s}* has not 
+the same property \textit{c} as \textit{all} last \textit{k elements} 
+of \textbf{O}.
+
+As before, if the step (a) is accepted (\textit{true}) then step (b) will be evaluated.
+\end{quote}
+
+It is trivial to show the proof \textsuperscript{[9] [10] [11]} and the sorting algorithm 
+\textsuperscript{step (a)} are the same as the original if \textit{k} = 1.
+
+\textit{Correctness}: The same predicate function \textit{b} will check and accept 
+the sequence \textbf{O}.
+
+\begin{quote}
+\textit{b}(o\textsubscript{1}) to \textit{b}(o\textsubscript{k-1}), iteratively, 
+are accepted by (a): \textbar{}\textbf{O}\textbar{} \texttt{<} \textit{k}; and 
+by (b): \textbf{S}* = \textbf{S} - \{o\textsubscript{1}, \ldots, o\textsubscript{k-1}\} 
+is a \textit{feasible} sequence where it is possible to build a sequence with up 
+to \textit{k consecutive elements} sharing the property \textit{c}. For all the 
+other elements of \textbf{O}, \textit{b}(o\textsubscript{k}) to \textit{b}(o\textsubscript{\textbar{}O\textbar{}}), iteratively, are accepted by (a): o\textsubscript{n-k} to o\textsubscript{n-1} have not, \textit{all of them}, the same property \textit{c} as o\textsubscript{n}; 
+and (b): \textbf{S}* = \textbf{S} - \{o\textsubscript{1}, \ldots, o\textsubscript{n}\} 
+is a \textit{feasible} sequence where it is possible to build a sequence with up 
+to \textit{k consecutive elements} sharing the property \textit{c}. Therefore,\textit{ 
+b}(o\textsubscript{n}) is \textit{true} for every element in the sequence \textbf{O}.
+\end{quote}
+
+\textit{Notes:} The feasibility test \textsuperscript{[8] [11]} provides an upper and lower \textit{bound} to the cardinality of each sub-sequence. If all sub-sequences are of the same cardinality \textsuperscript{[6]} then the case is trivial and there exist many functions to pair the elements. However, to avoid any \textit{pattern} in the output sequence, e.g. similar \textit{distances} between elements with the same property \textit{c}, or any pattern with any \textit{grouping} of elements, the proposed algorithm produces a true random output sequence with only the desired constraint.
+
+The \textit{bounds} in the size relationship among the sub-sequences are \textit{universal bounds for any other algorithm or pairing function} that builds an output sequence with only \textit{k consecutive elements} of the same property. The proposed algorithm in this document is the simplest: pick a \textit{random element} and check if the \textit{remainder sequence} is still within the boundaries. Carry on until all \textit{input elements} are sorted in the output.
+
+\end{document}
