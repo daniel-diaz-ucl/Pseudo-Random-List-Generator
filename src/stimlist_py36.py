@@ -20,7 +20,6 @@ def counter_seq(seq_pairs):
 
     return [list(pair_cond_count) for pair_cond_count in seq_cond_count]
 
-
 class StimList(list):
     """Stimulus list to be sorted"""
 
@@ -77,7 +76,7 @@ class StimList(list):
 
             self.out_seq.append(self.__random_jump(simple_seq))
 
-        return self.out_seq
+        return self.__merge_seq()
 
     def __feasibility_test(self, seq_cond_count):
         """Test to check if the output list can be built."""
@@ -85,6 +84,16 @@ class StimList(list):
         counters.sort(reverse=True)
 
         return self.k * sum(counters[1:]) >= (counters[0] - self.k)
+
+    def __merge_seq(self):
+        """Merge input_seq and out_seq by common column and order of out_seq"""
+        temp_seq = []
+        for i in self.out_seq:
+            for j in self.input_seq:
+                if i[self.trial_id] == j[self.trial_id]:
+                    temp_seq.append(j)
+
+        return temp_seq
 
     def __redux_seq(self):
         """Create a simplified sequence with pairs: trial_id, exp_cond."""
