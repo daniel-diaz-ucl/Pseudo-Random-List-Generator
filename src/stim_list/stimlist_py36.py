@@ -1,7 +1,9 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to sort a list such as no k consecutive elements share the same exp_cond"""
+"""Module to randomly sort a list such as no k consecutive elements share the same exp_cond.
+Compatible with PsychoPy and Python 3.6"""
+
 
 import random
 from collections import Counter
@@ -14,11 +16,13 @@ __maintainer__ = "Daniel Diaz"
 __email__ = "daniel.diaz@ucl.ac.uk"
 __status__ = "Production"
 
+
 def counter_seq(seq_pairs):
     """Create a sequence with pairs: exp_cond, count."""
     seq_cond_count = Counter([pair_id_cond[1] for pair_id_cond in seq_pairs]).items()
 
     return [list(pair_cond_count) for pair_cond_count in seq_cond_count]
+
 
 class StimList(list):
     """Stimulus list to be sorted"""
