@@ -131,5 +131,3 @@ dmypy.json
 # Mac file browser
 .DS_Store
 
-# IDEA PyCharm files
-.idea/
