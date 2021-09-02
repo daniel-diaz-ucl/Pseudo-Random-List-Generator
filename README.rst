@@ -49,4 +49,4 @@ The code is released as GPL 3.0 to allow it to be integrated with
 PsychoPy.
 
 A proof of correctness of the algorithm is available as a Latex document
-in the proof folder.
+in the proof folder inside the docs folder.
