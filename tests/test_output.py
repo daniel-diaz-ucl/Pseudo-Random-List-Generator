@@ -19,8 +19,10 @@ def create_list():
 
     return my_list
 
+
 def column(matrix, i):
     return [row[i] for row in matrix]
+
 
 def test_output():
     test_list = create_list()
