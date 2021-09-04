@@ -26,14 +26,16 @@ def counter_seq(seq_pairs):
 
 class StimList(list):
     """Stimulus list to be randomly sorted.
-    Parameters: input_seq : List[list])
-                    Input List
-                exp_cond : int
-                    Index of Experimental condition column
-                trial_id=0 : int
-                    Index of Trial-ID/Number column
-                k=1 : int
-                    Number of consecutive repetitions of exp_cond"""
+        Parameters:
+            input_seq : list[list]
+                Input List
+            exp_cond : int
+                Index of Experimental condition column
+            trial_id=0 : int
+                Index of Trial-ID/Number column
+            k=1 : int
+                Number of consecutive repetitions of exp_cond
+    """
 
     def __init__(self, input_seq, exp_cond, trial_id=0, k=1):
         """Check correct input values."""
