@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import csv
-import src.stim_list as stl
+from src.stim_list import stimlist as stl
 
 
 def create_list():
@@ -20,15 +20,32 @@ def create_list():
     return my_list
 
 
-def column(matrix, i):
-    return [row[i] for row in matrix]
+def check_seq(tested_list, col=1, k=1):
+    """
+    Correctness of an output sequence:
+    tested_list: List[List]
+    col: Int
+    k: Int
+    """
+    for n_elem, o_elem in enumerate(tested_list):
+        rep = n_elem - 1
+
+        while n_elem - rep <= k and rep >= 0:
+
+            if o_elem[col] != tested_list[rep][col]:
+                break
+            rep = rep - 1
+
+        else:
+            if rep < 0:
+                continue
+
+            return False
+
+    return True
 
 
 def test_output():
     test_list = create_list()
-    print(test_list)
 
-    test_column = column(test_list, 2)
-    print(test_column)
-
-    assert test_column == ['Blue', 'Blue', 'Blue', 'Red', 'Blue', 'Blue', 'Blue', 'Red', 'Blue', 'Blue', 'Blue', 'Red', 'Blue', 'Blue', 'Blue', 'Red', 'Blue', 'Blue', 'Blue', 'Red', 'Blue', 'Blue', 'Blue']
+    assert check_seq(test_list, col=2, k=3)
