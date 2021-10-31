@@ -3,7 +3,7 @@
 
 """
 Pseudo Random list generator from input file.
-For offline input lists to feed psycholinguistics experiments
+It creates offline input lists to feed psycholinguistics experiments
 """
 
 import argparse
@@ -40,7 +40,7 @@ def main():
 
     # parse the arguments from standard input
     args = parser.parse_args()
-    
+
 
 if __name__ == "__main__":
     # calling the main function
