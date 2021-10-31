@@ -2,11 +2,18 @@
 # -*- coding: utf-8 -*-
 
 import csv
-# import the module
-# Usually copy the module stimlist.py to the folder together with your main python script
+# import the module.
+
+# Two options:
+# 1. Copy the module stimlist.py to the folder together with your main python script
 # and then import it using:
 #       import stimlist as stl
-import src.stim_list as stl
+
+# 2. Install the package and import hte module from it
+#       from prlgen import stimlist as stl
+
+# here we use the number one for the example adding the subfolders in the path
+from ..src.stim_list import stimlist as stl
 
 # load your csv file
 f = open("test.csv", "r")
@@ -16,7 +23,7 @@ in_seq = []
 for row in cc:
     in_seq.append(row)
 
-# First: call the package with your parameters.
+# First: call the module with your parameters.
 # In this example the parameters are:
 #   in_seq: the input list from the csv file
 #   exp_cond = 2: index of the experimental condition column, starts counting at zero

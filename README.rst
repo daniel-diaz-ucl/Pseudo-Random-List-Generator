@@ -25,7 +25,7 @@ Examples are: **PsychoPy**
 range of experiments in the behavioral sciences (neuroscience,
 psychology, psychophysics, linguistics...).
 
-This is a critical feature in **psycholinguistics** experiments now available:
+This is a critical feature in **psycholinguistics** experiments and it is now available:
 sorting on the fly the stimuli from the input list before any of them is
 presented whilst avoiding repetitions. The researcher usually needs to show the stimuli in a
 randomised order but must not allow **consecutive trials of the same
