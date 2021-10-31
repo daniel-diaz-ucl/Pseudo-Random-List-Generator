@@ -5,15 +5,15 @@ import csv
 from src.stim_list import stimlist as stl
 
 
-def create_list():
-    f = open("test_data.csv", "r")
+def create_list(test_data, col=1, k=1):
+    f = open(test_data, "r")
     cc = csv.reader(f)
     next(cc)
     in_seq = []
     for row in cc:
         in_seq.append(row)
 
-    my_list = stl.StimList(in_seq, 2, k=3)
+    my_list = stl.StimList(in_seq, col, k=k)
 
     my_list = my_list.prand_seq()
 
@@ -46,6 +46,17 @@ def check_seq(tested_list, col=1, k=1):
 
 
 def test_output():
-    test_list = create_list()
+    col = 2
+    k = 3
+    test_list = create_list("test_data_0.csv", col, k)
+    assert check_seq(test_list, col, k)
 
-    assert check_seq(test_list, col=2, k=3)
+    col = 4
+    k = 1
+    test_list = create_list("test_data_1.csv", col, k)
+    assert check_seq(test_list, col, k)
+
+    col = 5 
+    k = 4
+    test_list = create_list("test_data_2.csv", col, k)
+    assert check_seq(test_list, col, k)
