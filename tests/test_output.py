@@ -56,7 +56,7 @@ def test_output():
     test_list = create_list("test_data_1.csv", col, k)
     assert check_seq(test_list, col, k)
 
-    col = 5 
+    col = 5
     k = 4
     test_list = create_list("test_data_2.csv", col, k)
     assert check_seq(test_list, col, k)
