@@ -14,6 +14,12 @@ It is a command line tool that expects as arguments:
 
 It will create the output files in the same folder as the input file.
 
+To build a source distribution of the package, run the following command from the root directory of the project:
+
+`python setup.py sdist`
+
+This will create a `.tar.gz` file in the **dist** directory that contains the source code of the package and can be installed using pip.
+
 It is possible to use this package inside your own **python compatible stimuli presentation software**.
 Examples are: **PsychoPy**
 (`https://www.psychopy.org/ <https://www.psychopy.org/>`__) and others like:

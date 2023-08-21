@@ -1,14 +1,16 @@
 Welcome to Pseudo Random List Sorting Algorithm's documentation!
 ================================================================
 
-.. automodule:: stim_list.stimlist
-   :members:
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+.. autosummary::
+   :toctree: _autosummary
+   :recursive:
 
+   prlgen
+   stim_list.stimlist
 
 Indices and tables
 ==================
