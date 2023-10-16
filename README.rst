@@ -1,7 +1,7 @@
 Pseudo Random List Generator (PRLGEN)
 ====================================
 
-This is a **Python 3.6+** compatible *package* that can be used to create offline
+This is a **Python 3.6+** compatible *package* that can be used to create **offline** and **online**
 pseudo randomised stimuli lists for Psycholinguistics experiments.
 
 It is a command line tool that expects as arguments:

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import csv
+
 from src.stim_list import stimlist as stl
 
 
@@ -31,7 +32,6 @@ def check_seq(tested_list, col=1, k=1):
         rep = n_elem - 1
 
         while n_elem - rep <= k and rep >= 0:
-
             if o_elem[col] != tested_list[rep][col]:
                 break
             rep = rep - 1
