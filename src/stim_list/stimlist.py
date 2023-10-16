@@ -77,23 +77,26 @@ class StimList(list):
 
         # Check correct input values.
         if not input_seq:
-            raise ValueError('input list is empty')
+            raise ValueError("input list is empty")
 
         if k < 1:
-            raise ValueError('k value should be 1 or more')
+            raise ValueError("k value should be 1 or more")
 
         if exp_cond == trial_id:
-            raise ValueError('trial_id column and exp_cond column should be different')
+            raise ValueError("trial_id column and exp_cond column should be different")
 
         if exp_cond < 0 or trial_id < 0:
-            raise ValueError('Python indexes start from 0')
+            raise ValueError("Python indexes start from 0")
 
         if exp_cond >= len(input_seq[0]) or trial_id >= len(input_seq[0]):
-            raise ValueError('trial_id column or exp_cond column index are out of range')
+            raise ValueError(
+                "trial_id column or exp_cond column index are out of range"
+            )
 
-        if (len(list(zip(*input_seq))[trial_id]) !=
-                len(set(list(zip(*input_seq))[trial_id]))):
-            raise ValueError('trial_id column contains duplicates')
+        if len(list(zip(*input_seq))[trial_id]) != len(
+            set(list(zip(*input_seq))[trial_id])
+        ):
+            raise ValueError("trial_id column contains duplicates")
 
         # Output sequence
         self.out_seq = []
@@ -116,12 +119,13 @@ class StimList(list):
         init_cond_count = counter_seq(simple_seq)
         init_check = self.__feasibility_test(init_cond_count)
         if not init_check:
-            raise ValueError('input list CAN NOT be pseudo randomized with actual parameters')
+            raise ValueError(
+                "input list CAN NOT be pseudo randomized with actual parameters"
+            )
 
-        print('INFO: Input list can be pseudo randomized with current parameters')
+        print("INFO: Input list can be pseudo randomized with current parameters")
 
         for _ in self.input_seq:
-
             if len(simple_seq) == self.k:
                 random.shuffle(simple_seq)
                 self.out_seq.extend(simple_seq)
@@ -166,8 +170,12 @@ class StimList(list):
 
         :return: A list of lists containing pairs of trial IDs and experimental conditions.
         """
-        seq_pairs = list(zip(list(zip(*self.input_seq))[self.trial_id],
-                             list(zip(*self.input_seq))[self.exp_cond]))
+        seq_pairs = list(
+            zip(
+                list(zip(*self.input_seq))[self.trial_id],
+                list(zip(*self.input_seq))[self.exp_cond],
+            )
+        )
 
         return [list(pair_id_cond) for pair_id_cond in seq_pairs]
 
@@ -180,17 +188,18 @@ class StimList(list):
         :param simple_seq: The input sequence of pairs containing trial IDs and experimental conditions.
         :return: A feasible element selected from the input sequence.
         """
-        out_seq_count = dict(counter_seq(self.out_seq[-self.k:]))
+        out_seq_count = dict(counter_seq(self.out_seq[-self.k :]))
 
         while simple_seq:
             candidate = random.choice(simple_seq)
             simple_seq.remove(candidate)
             seq_cond_count = counter_seq(simple_seq)
 
-            if (not self.out_seq or
-                    not candidate[1] in out_seq_count or
-                    out_seq_count[candidate[1]] + 1 <= self.k):
-
+            if (
+                not self.out_seq
+                or not candidate[1] in out_seq_count
+                or out_seq_count[candidate[1]] + 1 <= self.k
+            ):
                 if self.__feasibility_test(seq_cond_count):
                     return candidate
 

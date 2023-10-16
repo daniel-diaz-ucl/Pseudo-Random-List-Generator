@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import csv
+
+# here we use the number one for the example adding the subfolders in the path
+from ..src.stim_list import stimlist as stl
+
 # import the module.
 
 # Two options:
@@ -9,11 +13,9 @@ import csv
 # and then import it using:
 #       import stimlist as stl
 
-# 2. Install the package and import hte module from it
+# 2. Install the package and import the module from it
 #       from prlgen import stimlist as stl
 
-# here we use the number one for the example adding the subfolders in the path
-from ..src.stim_list import stimlist as stl
 
 # load your csv file
 f = open("test.csv", "r")
