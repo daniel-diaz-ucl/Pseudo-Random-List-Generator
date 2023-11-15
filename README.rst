@@ -77,3 +77,5 @@ programing language with enough expression power. The tests code implements the 
 described in the proof document under the correctness paragraph for *k consecutive elements*.
 Any new implementation should also validate the correctness using the same function
 in the target language.
+
+The Latex document in the proof folder is under **Creative Commons Attribution Licence, CC-BY**.
