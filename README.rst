@@ -1,4 +1,5 @@
 Pseudo Random List Generator (PRLGEN)
+
 ====================================
 
 This is a **Python 3.6+** compatible *package* that can be used to create **offline** and **online**
